@@ -3,6 +3,8 @@ import random
 import time
 import sys
 import os
+import matplotlib.pyplot as plt
+
 inventario=[]
 """Atributos de un experimento como: nombre,fecha,tipo y resultados numericos"""
 def agregar_experimento():
@@ -18,8 +20,11 @@ def agregar_experimento():
             break
         else:
             print("Tipo inválido. Por favor, elija entre Física, Química o Biología.")
-    
-     resultados = input("Ingrese los resultados obtenidos: ")
+            
+            
+     resultados = input("Resultados separados por coma (1,2,3,4,5,6,7,8,9): " ).split(",")
+     resultados = [float(valor.strip()) for valor in resultados]
+     
     
     # Agregar el experimento a la lista
      inventario.append({
@@ -32,15 +37,7 @@ def agregar_experimento():
      os.system('cls')
 
 # Uso del código
-     return inventario
-
-
-    
-
-
-
-
-    
+     return inventario    
 def visualizar_experimentos():
     global inventario
     if not inventario:
@@ -66,13 +63,42 @@ def visualizar_experimentos():
 
 
 
-def calcular_estadisticas():
-    pass
+def calcular_estadisticas(inventario):
+# Datos
+    inventario=[nombre,fecha,tipo,resultados,]
+
+    # Extraer nombres, resultados y tipos de asignaturas
+    nombre = [persona["nombre"] for persona in inventario]
+    resultados = [persona["resultados"] for persona in inventario]
+    tipo= [persona["tipo"] for persona in inventario]
+
+    # Colores según tipo de asignatura
+    colores = {'Fisica': 'blue', 'Quimica': 'green', 'Biologia': 'red'}
+
+    # Crear gráfico de barras con colores según asignatura
+    fig, ax = plt.subplots()
+    for i, persona in enumerate(inventario):
+
+        ax.bar(nombre[i], persona["resultados"], color=colores[persona["tipo"]])
+
+    # Añadir título y etiquetas
+    plt.title('Resultados por persona')
+    plt.xlabel('Nombre')
+    plt.ylabel('Resultados')
+
+    # Añadir leyenda para los tipos de asignaturas
+    handles = [plt.Rectangle((0,0),1,1, color=colores[tipo]) for tipo in colores]
+    labels = [f'{tipo}' for tipo in colores]
+    plt.legend(handles, labels, title="Tipo de Asignatura")
+
+    # Mostrar el gráfico
+    plt.show()
 def comparar_experimentos():
     pass
 def generar_informe():
     pass
 def eliminarExperimento():
+        
         pass
 def mostar_menu():
   
