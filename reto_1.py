@@ -1,105 +1,162 @@
-import datetime
-import random
+from datetime import datetime
+import numpy as np  # Necesario para calcular la exponencial
 import time
 import sys
 import os
 import matplotlib.pyplot as plt
 
+
 inventario=[]
 """Atributos de un experimento como: nombre,fecha,tipo y resultados numericos"""
-def agregar_experimento():
-     print("Agregando nuevo experimento")
-     print("")
-     nombre = input("Ingrese el nombre del experimento: ")
-     fecha = input("Ingrese la fecha de realización (YYYY-MM-DD): ")
+def agregarExperimento(inventario):
     
-     while True:
-        tipo = input("Ingrese el tipo de experimento (Física, Química, Biología): ").strip().lower()
-        if tipo in ['física', 'química', 'biología']:
-            tipo = tipo.capitalize()
+    while True:
+        # Solicitar datos básicos de la investigación
+        while True:
+            nombre = input("Digita nombre de la investigación: ").strip()
+            tipo = input("Ingrese el tipo de experimento (Física, Química, Biología): ").strip().lower()
+            if tipo in ['física', 'química', 'biología']:
+                tipo = tipo.capitalize()
+                break
+            elif tipo!=("física","biología","química"):
+                print("Tipo inválido. Por favor, elija entre Física, Química o Biología.")
+                print("vueleve a intentarlo")
+            else:
+                print("incorrecto")
+                break
+        
+        while True:
+                
+                fecha = input("Digita la fecha (d/m/a) ").strip().lower()
+                try:
+                    fechas= datetime.strptime(fecha, "%d/%m/%Y")  # Conversión correcta de fecha
+                    break  # Salir del bucle si la fecha es válida
+                except ValueError:
+                    print("Fecha no válida. Debe tener el formato d/m/a (ejemplo: 25/12/2023).")
+                    n=input("volver a digitar fecha s/n :")
+                    if n=="n":
+                     break
+                    elif n!="s"and n!="n":
+                     print("Error de opcion")
+                     break
+                op=input("quieres seguir agregando investigaciones s/n")  
+                if op=="n":
+                 break   
+        resultados = []
+        while True:
+            try:
+                resultado = float(input("Digita un resultado de la investigación (escribe 'fin' para terminar): "))
+                resultados.append(resultado)  # Agregar resultado a la lista
+            except ValueError:
+                finalizar = input("¿Terminar ingreso de resultados? (s/n): ").strip().lower()
+                if finalizar == "s":
+                    break
+
+        investigacion = {
+            "nombre": nombre,
+            "tipo": tipo,
+            "fecha": fecha,
+            "resultados": resultados
+        }
+        
+        inventario.append(investigacion)
+        
+        
+        continuar = input("¿Deseas agregar otra investigación? (s/n): ").strip().lower()
+        if continuar != "s":
             break
-        else:
-            print("Tipo inválido. Por favor, elija entre Física, Química o Biología.")
-            
-            
-     resultados = input("Resultados separados por coma (1,2,3,4,5,6,7,8,9): " ).split(",")
-     resultados = [float(valor.strip()) for valor in resultados]
-     
+    return inventario
     
-    # Agregar el experimento a la lista
-     inventario.append({
-        "nombre": nombre,
-        "fecha": fecha,
-        "tipo": tipo,
-        "resultados": resultados
-     })
-     input("Digita enter para continuar")
-     os.system('cls')
-
-# Uso del código
-     return inventario    
-def visualizar_experimentos():
-    global inventario
+  
+def visualizarExperimentos(inventario):
+    
     if not inventario:
-        print("EL inventario de experimentos se encuentra vacio:")
-    else:
-        print(" "*30,"="*70)
-        print(" "*30,"           INVENTARIO DE EXPERIMENTOS  ")
-
-        print(" "*30,"="*70)
-        print(f"{" "*31}{'Nombre':<20} {'Fecha':<15} {'Tipo':<10} {'Resultados':<10}")
-        print(" "*30,"="*70)  # Línea de separación
-
-        for experimento in inventario:
-            nombre = experimento["nombre"]
-            fecha = experimento["fecha"]
-            tipo = experimento["tipo"]
-            resultados = experimento["resultados"]
-            
-            # Mostrar cada experimento de forma ordenada
-            print(f"{" "*31}{nombre:<20} {fecha:<15} {tipo:<10} {resultados:<10}")
-            input("                               ======= DIgita enter para continuar ==== ")
-            os.system('cls')
-
-
+      print("El inventario está vacío. No hay investigaciones para mostrar.")
+      return
+    print(" "*20,"  Inventario  Experimentos ")
+    for idx, inv in enumerate(inventario, start=1):
+        # Mostrar resultados con saltos de línea
+        resultados_str = " | ".join(map(str, inv['resultados']))
+        print("="*20)
+        print(f"Experimento N° {idx}",)
+        print("="*20)
+        print(f"Nombre: ",inv['nombre'])
+        print(f"Tipo: ", inv['tipo'],)
+        print(f"Fecha: ",inv['fecha'])
+        print("Resultados:",resultados_str)
+        print("="*20)
 
 def calcular_estadisticas(inventario):
-# Datos
-    inventario=[nombre,fecha,tipo,resultados,]
+    if not inventario:
+        print("No hay datos en el inventario para analizar.")
+        return
 
-    # Extraer nombres, resultados y tipos de asignaturas
-    nombre = [persona["nombre"] for persona in inventario]
-    resultados = [persona["resultados"] for persona in inventario]
-    tipo= [persona["tipo"] for persona in inventario]
+    fechas = []
+    resultados_exponenciales = []
 
-    # Colores según tipo de asignatura
-    colores = {'Fisica': 'blue', 'Quimica': 'green', 'Biologia': 'red'}
+    # Diccionarios para almacenar datos procesados
+    fecha_diccionario = {}
+    resultados_diccionario = {}
 
-    # Crear gráfico de barras con colores según asignatura
-    fig, ax = plt.subplots()
-    for i, persona in enumerate(inventario):
+    # Organizar los datos
+    for idx, elemento in enumerate(inventario):
+        fecha_diccionario[f"Estudio_{idx + 1}"] = elemento["fecha"]
+        resultados_diccionario[f"Estudio_{idx + 1}"] = elemento["resultados"]
+        
+        # Convertir fechas a formato datetime
+        fechas.append(datetime.strptime(elemento["fecha"], "%d/%m/%Y"))
 
-        ax.bar(nombre[i], persona["resultados"], color=colores[persona["tipo"]])
+        # Calcular los resultados exponenciales
+        resultados_exponenciales.append(np.exp(elemento["resultados"]))
 
-    # Añadir título y etiquetas
-    plt.title('Resultados por persona')
-    plt.xlabel('Nombre')
-    plt.ylabel('Resultados')
+    # Mostrar datos organizados
+    print("\nFechas por investigación:", fecha_diccionario)
+    print("\nResultados por investigación:", resultados_diccionario)
 
-    # Añadir leyenda para los tipos de asignaturas
-    handles = [plt.Rectangle((0,0),1,1, color=colores[tipo]) for tipo in colores]
-    labels = [f'{tipo}' for tipo in colores]
-    plt.legend(handles, labels, title="Tipo de Asignatura")
+    # Graficar
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for idx, inv in enumerate(inventario):
+        ax.plot(
+            [fechas[idx]] * len(inv["resultados"]),  # Fecha repetida para cada resultado
+            np.exp(inv["resultados"]),  # Resultados exponenciales
+            marker="o",
+            label=inv["nombre"]
+        )
 
-    # Mostrar el gráfico
+    # Personalización del gráfico
+    ax.set_title("Resultados Exponenciales de Investigaciones", fontsize=14)
+    ax.set_xlabel("Fecha", fontsize=12)
+    ax.set_ylabel("Resultados Exponenciales", fontsize=12)
+    ax.legend(title="Investigación", fontsize=10)
+    plt.xticks(rotation=45)
+    plt.grid(True, linestyle="--", alpha=0.7)
+    plt.tight_layout()
     plt.show()
-def comparar_experimentos():
-    pass
+
 def generar_informe():
     pass
-def eliminarExperimento():
+def eliminarExperimento(inventario):
+    
+    if not inventario:
+        print("Error: El inventario está vacío.")
+        return
+    
+    print(" " * 20, "  Inventario de Experimentos ")
+    
+    opcion = input("\nIngresa el nombre de la investigación que deseas eliminar: ").strip()
+    
+    # Buscar la investigación por nombre
+    for inv in inventario:
+        if inv['nombre'].lower() == opcion.lower():  # Comparación sin importar mayúsculas/minúsculas
+            inventario.remove(inv)  # Eliminar la investigación
+            print(f"\nLa investigación '{opcion}' ha sido eliminada exitosamente.")
+            return
+    
+    # Si no se encuentra la investigación
+    print(f"\nNo se encontró ninguna investigación con el nombre '{opcion}'.")
+
         
-        pass
+        
 def mostar_menu():
   
         RED = "\033[31m"
@@ -156,16 +213,6 @@ def subMenu():
     print(" "*40,"4️⃣  Salir 🚪\033[0m")
 
     print(" "*40,"="*40 + "\033[0m")
-def menuexperimentos():
-    print(" "*40,"=" * 20)
-    print(" "*40,"      🧪 MENÚ DE EXPERIMENTOS 🧪")
-    print(" "*40,"=" * 20)
-    print(" "*40,"1️⃣ Física ⚡")
-    print(" "*40,"2️⃣ Química 🧫")
-    print(" "*40,"3️⃣ Biología 🌱")
-    print(" "*40,"4️⃣ Salir 🚪")
-    print(" "*40,"=" * 20)
-
 def main():
      while True:
         mostar_menu()
@@ -179,20 +226,20 @@ def main():
                 option=input("           Digita opcion:")
                 os.system('cls')
                 if option=="1":
-                    agregar_experimento()
+                    agregarExperimento(inventario)
                  
                 elif option=="2":
-                    visualizar_experimentos()
+                    visualizarExperimentos(inventario)
                 elif option=="3":
-                    eliminarExperimento()
+                    eliminarExperimento(inventario)
                 else:
                     print("  OPcion invalida:")
                     break
                 
         elif opcion=="2":
-           calcular_estadisticas()
+           calcular_estadisticas(inventario)
         elif opcion=="3":
-             generar_informe()
+             generar_informe(inventario)
         elif opcion=="4":
             print("Saliendo de programa")
             break
