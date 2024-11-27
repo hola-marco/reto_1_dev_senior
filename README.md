@@ -34,7 +34,7 @@ El proyecto **Gestión de Experimentos** nos permite :
 
 ---
 ## 🖥️ **  Menú Principal **
-![alt text](<DALL·E 2024-11-23 19.22.29 - A rocker with a wild hairstyle and leather jacket standing on a futuristic balcony, admiring a high-tech cityscape at sunset. The city features toweri.webp>)
+![alt text](<Captura de pantalla 2024-11-27 111534.png>)
 
 ## 🖥️ **  SubMenú **
 
