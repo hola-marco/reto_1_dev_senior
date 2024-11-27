@@ -38,7 +38,7 @@ El proyecto **Gestión de Experimentos** nos permite :
 
 ## 🖥️ **  SubMenú **
 
-El programa incluye un menú interactivo con opciones fáciles de usar:
+El programa incluye un submenú interactivo con opciones fáciles de usar:
 
 ```text
 1️⃣ Agregar Experimento 🧪  
@@ -46,6 +46,26 @@ El programa incluye un menú interactivo con opciones fáciles de usar:
 3️⃣ Eliminar Experimento ❌  
 4️⃣ Generar Informe 📝  
 5️⃣ Salir 🚪  
+## 📚 Librerías utilizadas
 
+A continuación, te presentamos las principales librerías empleadas en este proyecto:
+
+- **📅 `datetime`**: Se encarga de la validación y formato de las fechas de los experimentos. Permite que las fechas se ingresen y muestren de forma adecuada.
+  
+- **🔢 `numpy`**: Utilizada para realizar manipulaciones numéricas avanzadas y trabajar con el manejo de fechas para los gráficos.
+
+- **⏲️ `time`**: Permite hacer pausas en la ejecución del programa para una mejor interacción con el usuario, dando tiempo entre acciones.
+
+- **🖥️ `sys`**: Generalmente usada para interactuar con el sistema operativo, aunque en este código no se emplea de manera activa. Es útil para la administración del entorno.
+
+- **🧰 `os`**: Se utiliza para ejecutar comandos del sistema operativo, como limpiar la terminal para mantener el entorno limpio y organizado.
+
+- **📊 `matplotlib.pyplot`**: Librería para crear gráficos y visualizaciones que permiten representar de forma visual los resultados de las investigaciones.
+
+- **📈 `statistics`**: Se usa para realizar cálculos estadísticos básicos, como el promedio, máximo y mínimo de los resultados de los experimentos.
+
+---
+
+Estas librerías han sido fundamentales para crear una herramienta interactiva de gestión y análisis de experimentos científicos.
 
 
