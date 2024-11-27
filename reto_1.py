@@ -24,7 +24,7 @@ def agregarExperimento(inventario):
         while True:
             nombre = input("Digita nombre de la investigación: ").strip()
             tipo = input("Ingrese el tipo de experimento (Física, Química, Biología): ").strip().lower()
-            if tipo in ['fìsica', 'quìmica', 'biologìa']:
+            if tipo in ['física', 'química', 'biología']:
                 tipo = tipo.capitalize()
                 break
             
@@ -96,11 +96,14 @@ def calcular_estadisticas(inventario):
     if not inventario:
         print("No hay datos suficientes para realizar el análisis. El inventario está vacío.")
         return  # Salir si no hay inventario
-
+    
     for idx, inv in enumerate(inventario, start=1):
         cantidad_resultados = len(inv["resultados"])
         if cantidad_resultados < 3:
             print(f"La investigación '{inv['nombre']}' no tiene suficientes resultados para analizar (mínimo: 3).")
+            time.sleep(2)
+            return
+
         else:
             print(f"La investigación '{inv['nombre']}' tiene {cantidad_resultados} resultados, lista para análisis.")
 
@@ -121,20 +124,22 @@ def calcular_estadisticas(inventario):
 
     for elemento in inventario:
         # Convertir fecha a formato datetime
-        fechas.append(datetime.strptime(elemento["fecha"], "%d/%m/%Y"))
+        #fechas.append(datetime.strptime(elemento["fecha"], "%d/%m/%Y"))
+        fechas.append(elemento["fecha"])
         resultado.append(elemento["resultados"])
         nombres.append(elemento["nombre"])
 
     print("="*20)
-    print("Ahora podemos dar un analisis mediante un grafico")
+    print("Ahora podemos comparar  mediante un grafico")
     print("Selecciona el tipo de gráfico:")
     print("="*20)
     print(" ")
     print("1. Gráfico de líneas")
     print(" ")
-    print("2. Gráfico de barras")
-    print(" ")
-    print("3. Gráfico de dispersión")
+    print("2. Gráfico de dispersión")
+    print("")
+    print("="*20)
+    print("")
     opcion = input("Digita Opcion ").strip()
 
     # Configuración inicial del gráfico
@@ -152,19 +157,7 @@ def calcular_estadisticas(inventario):
         ax.set_title("DEV SENIOR CODE", fontsize=14)
         ax.set_title("Gráfico de Líneas: Resultados de Investigaciones", fontsize=14)
 
-
     elif opcion == "2":
-        # Gráfico de barras
-        for i, res in enumerate(resultado):
-            ax.bar(
-                [fechas[i] + np.timedelta64(idx, 'D') for idx in range(len(res))], 
-                res,
-                label=nombres[i],
-                alpha=0.7
-            )
-        ax.set_title("Gráfico de Barras: Resultados de Investigaciones", fontsize=14)
-
-    elif opcion == "3":
         # Gráfico de dispersión
         for i, res in enumerate(resultado):
             ax.scatter(
@@ -210,6 +203,17 @@ def eliminarExperimento(inventario):
         return
     
     print(" " * 20, "  Inventario de Experimentos ")
+    for idx, inv in enumerate(inventario, start=1):
+        resultados_str = " | ".join(map(str, inv['resultados']))
+        print("="*20)
+        print(f"Experimento N° {idx}",)
+        print("="*20)
+        print(f"Nombre: ",inv['nombre'])
+        print(f"Tipo: ", inv['tipo'],)
+        print(f"Fecha: ",inv['fecha'])
+        print("Resultados:",resultados_str)
+        print("="*20)
+
     
     opcion = input("\nIngresa el nombre de la investigación que deseas eliminar: ").strip()
     
