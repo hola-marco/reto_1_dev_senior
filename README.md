@@ -34,30 +34,7 @@ El proyecto **Gestión de Experimentos** nos permite :
 
 ---
 ## 🖥️ **  Menú Principal **
-print(GREEN," "*30,"        +--------------------------+")
-        print(GREEN," "*30,"       /|",  azul_rey , "DEV     🐍💻",GREEN,"         /|")
-        print(GREEN," "*30,"      / |  ",negro ,"   SENIOR  ",GREEN,"       / |")
-        print(GREEN," "*30,"     /  |      ", RESET,"     CODE ",GREEN,"   /  |")
-        print(GREEN," "*30,"    +--------------------------+   |")
-        print(GREEN," "*30,"    |  |                       |   |")
-        print(GREEN," "*30,"    |  |   ██████████████████  |   |")
-        print(GREEN," "*30,"    |  |   |",RESET,"MENU PRINCIPAL ",GREEN,"|   |")
-        print(GREEN," "*30,"    |  |   |-------------------|   |")
-        print(GREEN," "*30,"    |  |🧪 | ",RESET,"1. Gestión de ",GREEN,"|   |")
-        print(GREEN," "*30,"    |  |   | ",RESET,"Experimentos ",GREEN," |   |")
-        print(GREEN," "*30,"    |  |   |-------------------|   |")
-        print(GREEN," "*30,"    |  |🔍 | ",RESET,"2. Análisis de",GREEN,"|   |")
-        print(GREEN," "*30,"    |  |   | ",RESET,"Datos        ",GREEN," |   |")
-        print(GREEN," "*30,"    |  |   |-------------------|   |")
-        print(GREEN," "*30,"    |  |📊 |",RESET,"3.Generación   ",GREEN,"|   |")
-        print(GREEN," "*30,"    |  |   | ",RESET,"Informe    ",GREEN,"   |   |")
-        print(GREEN," "*30,"    |  |   |-------------------|   |")
-        print(GREEN," "*30,"    |  |🔙 |",RESET,"4. Salir    ",GREEN,"   |   |")
-        print(GREEN," "*30,"    |  |   +-------------------+   |")
-        print(GREEN," "*30,"    |  |                       |   |")
-        print(GREEN," "*30,"    |  |                       |   |")
-        print(GREEN," "*30,"    |  +-----------------------|   |")
-        print(GREEN," "*30,"    +-------------------------+|")
+![alt text](<DALL·E 2024-11-23 19.22.29 - A rocker with a wild hairstyle and leather jacket standing on a futuristic balcony, admiring a high-tech cityscape at sunset. The city features toweri.webp>)
 
 ## 🖥️ **  SubMenú **
 
