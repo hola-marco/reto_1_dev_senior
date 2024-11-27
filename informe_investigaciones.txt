@@ -1,0 +1,10 @@
+Nombre: ter
+Tipo: Fìsica
+Fecha: 3/4/2024
+Resultados: 3, 4, 5, 7
+----------------------------------------
+Nombre: t
+Tipo: Fìsica
+Fecha: 3/7/2024
+Resultados: 3, 5, 7, 5
+----------------------------------------

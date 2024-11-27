@@ -187,8 +187,22 @@ def calcular_estadisticas(inventario):
     plt.tight_layout()
     # Mostrar el gráfico
     plt.show()
-def generar_informe():
-    pass
+def generar_informe(inventario):
+    if not inventario:
+        print("NO hay registro de investigaciones")
+        return
+
+    try:
+        with open("informe_investigaciones.txt", "w") as archivo:
+            for inves in inventario:
+                archivo.write(f"Nombre: {inves['nombre']}\n")
+                archivo.write(f"Tipo: {inves['tipo']}\n")
+                archivo.write(f"Fecha: {inves['fecha']}\n")
+                archivo.write(f"Resultados: {', '.join(map(str, inves['resultados']))}\n") 
+                archivo.write("-" * 40 + "\n")
+        print("Informe generado exitosamente: 'informe_investigaciones.txt'")
+    except Exception as e:
+        print(f"Ocurrió un error al generar el informe: {e}")
 def eliminarExperimento(inventario):
     
     if not inventario:
@@ -290,13 +304,13 @@ def main():
                 elif option=="2":
                     visualizarExperimentos(inventario)
                     input("Digita Enter para continuar")
-                   # os.system('cls')
+                    os.system('cls')
                 elif option=="3":
                     eliminarExperimento(inventario)
                     input("Digita Enter para continuar")
                     os.system('cls')
                 else:
-                    print("  OPcion invalida:")
+                    print("   Saliendo:")
                     time.sleep(2)
                     break
                 
