@@ -1,4 +1,5 @@
 # reto_1_dev_senior
+![alt text](<DALL·E 2024-11-27 11.59.59 - A modern illustration representing Colombia with a focus on technology. The background includes landmarks like Monserrate, a map outline of Colombia, .webp>)
 # 🧪 **Gestión de Experimentos 💻**
 
 > **Una herramienta interactiva para gestionar, analizar y visualizar experimentos científicos.**  
