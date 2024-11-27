@@ -40,7 +40,7 @@ El proyecto **Gestión de Experimentos** nos permite :
 
 El programa incluye un submenú interactivo con opciones fáciles de usar:
 
-```text
+
 1️⃣ Agregar Experimento 🧪  
 2️⃣ Mostrar Experimentos 📋  
 3️⃣ Eliminar Experimento ❌  
