@@ -44,12 +44,12 @@ def agregarExperimento(inventario):
                     n=input("volver a digitar fecha s/n :")
                     if n=="n":
                      break
-                    elif n!="s"and n!="n":
+                    #elif n!="s"and n!="n":
                      print("Error de opcion")
-                     break
-                op=input("quieres seguir agregando investigaciones s/n")  
-                if op=="n":
-                 break   
+                     
+        #op=input("quieres seguir agregando investigaciones s/n")  
+       # if op=="n":
+         #    break   
         resultados = []
         while True:
             try:
@@ -59,6 +59,8 @@ def agregarExperimento(inventario):
                 finalizar = input("¿Terminar ingreso de resultados? (s/n): ").strip().lower()
                 if finalizar == "s":
                     break
+          
+        #resultados = []
 
         investigacion = {
             "nombre": nombre,

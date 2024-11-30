@@ -1,5 +1,10 @@
 Nombre: den
 Tipo: Física
-Fecha: 3/7/2024
-Resultados: 23, 21
+Fecha: 3/4/2024
+Resultados: 
+----------------------------------------
+Nombre: maria
+Tipo: Química
+Fecha: 4/7/2024
+Resultados: 
 ----------------------------------------
